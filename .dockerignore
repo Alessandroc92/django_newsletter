@@ -1,0 +1,4 @@
+.git
+db.sqlite3
+.python-version
+__pycache__
