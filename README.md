@@ -4,8 +4,6 @@
 
 ## Stato del progetto
 
-Prototipo MVP sviluppato per esercitazione tecnica.
-
 Funzionalità incluse:
 
 - Gestione anagrafica dipendenti tramite API REST con full CRUD;
