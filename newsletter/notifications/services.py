@@ -1,5 +1,6 @@
 import datetime
 from . import models
+from newsletter.employees import services
 from newsletter import employees
 
 
@@ -63,11 +64,11 @@ def template_bday_info(
     
 
 def create_templates_to_send(**kwargs):
-    bday_employees = managers.employees_celebrating_bday(**kwargs)
+    bday_employees = services.employees_celebrating_bday(**kwargs)
     bday_templates = [
         template_bday(employee=employee, **kwargs) for employee in bday_employees
         ]
-    non_bday_employees = managers.employees_not_celebrating_bday(**kwargs)
+    non_bday_employees = services.employees_not_celebrating_bday(**kwargs)
     non_bday_templates = [
         template_bday_info(employee=employee, bday_employees=bday_employees, **kwargs) 
         for employee in non_bday_employees
@@ -77,13 +78,13 @@ def create_templates_to_send(**kwargs):
 
 def create_emails_from_templates(**kwargs):
     template_objects = create_templates_to_send(**kwargs)
-    templates = Template.objects.bulk_create(template_objects)
-    notification_run = NotificationRun.objects.create(
+    templates = models.Template.objects.bulk_create(template_objects)
+    notification_run = models.NotificationRun.objects.create(
         n_recipient=len(templates),
         notification_date=datetime.datetime.now().date()
         )
     email_logs = [
-        EmailLog(template=template, notification_run_id=notification_run.notification_run_id)
+        models.EmailLog(template=template, notification_run_id=notification_run.notification_run_id)
         for template in templates
         ]
     EmailLog.objects.bulk_create(email_logs)

@@ -40,7 +40,7 @@ def employees_not_celebrating_bday(
         models.Employee: A list of Employee objects.
     """
     now = datetime.datetime.now()
-    employees = Employee.objects.filter(
+    employees = models.Employee.objects.filter(
         active=True).exclude(
             team__team_type=avoid_team_type,
             birthdate__day=now.day,

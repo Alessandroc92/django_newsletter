@@ -1,7 +1,10 @@
 from rest_framework import viewsets
+from rest_framework.decorators import action
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.response import Response
 from . import models
 from . import serializers
+from . import tasks
 
 
 class ResultPagination(PageNumberPagination):
@@ -16,7 +19,7 @@ class NotificationRunViewSet(viewsets.ReadOnlyModelViewSet):
     
     @action(detail=False, url_path='send_bday_emails', methods=['post'])
     def activate_email_task(self, request: HttpRequest):
-        send_happy_bday_emails.enqueue(**request.data)
+        tasks.send_happy_bday_emails.enqueue(**request.data)
         return Response(data='The send bday email task has been executed as requested.')
 
 
