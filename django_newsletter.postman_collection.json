@@ -1,0 +1,315 @@
+{
+  "info": {
+    "_postman_id": "d7579a75-328a-4887-8297-120c0fb219af",
+    "name": "django_newsletter",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "20739232",
+    "_collection_link": "https://go.postman.co/collection/20739232-d7579a75-328a-4887-8297-120c0fb219af?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "list_branches",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/branches",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "branches"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "list_specific_branch",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/branches/3",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "branches",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "list_teams",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/teams",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "teams"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "list_specific_team",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/teams/23",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "teams",
+            "23"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "list_employees",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/employees",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "employees"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "list_specific_employee",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/employees/465",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "employees",
+            "465"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "create_employee",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"first_name\": \"Linus\",\n    \"last_name\": \"Torvalds\",\n    \"birthdate\": \"1969-12-18\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/employees/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "employees",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "patch_employee",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"birthdate\": \"1996-05-24\",\n    \"active\": false\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/employees/465/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "employees",
+            "465",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "delete_employee",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/employees/999/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "employees",
+            "999",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "run_standard_task",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/notification_runs/send_bday_emails/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "notification_runs",
+            "send_bday_emails",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "run_modified_task",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{   \n    \"custom_subject_no_bday\": \"No celebrations today :(\",\n    \"custom_body_no_bday\": \"There is no one celebrating their birthday today\",\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/notification_runs/send_bday_emails/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "notification_runs",
+            "send_bday_emails",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "list_email_logs",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/email_logs/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "email_logs",
+            ""
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
