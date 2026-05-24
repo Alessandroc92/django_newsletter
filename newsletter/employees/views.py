@@ -12,7 +12,7 @@ class ResultPagination(PageNumberPagination):
 
 class BranchViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Branch.objects.all()
-    serializer = serializers.BranchSerializer
+    serializer_class = serializers.BranchSerializer
     
 
 class TeamViewSet(viewsets.ReadOnlyModelViewSet):
