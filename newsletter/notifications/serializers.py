@@ -9,7 +9,6 @@ class NotificationRunSerializer(serializers.ModelSerializer):
         fields = (
             'notification_run_id',
             'n_recipients',
-            'notification_date',
         )
     
         
