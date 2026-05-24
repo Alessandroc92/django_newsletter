@@ -44,4 +44,4 @@ class Employee(models.Model):
     email_address = models.EmailField(null=False)
     birthdate = models.DateField(null=False)
     active = models.BooleanField(default=True)
-    crated_at = models.DateField(auto_now=True)
+    created_at = models.DateField(auto_now=True)
