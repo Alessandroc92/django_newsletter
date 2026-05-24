@@ -3,15 +3,15 @@ from . import models
 
 
 class BranchViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Branch.objects.all()
+    queryset = models.Branch.objects.all()
     serializer = None
     
 
 class TeamViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Team.objects.all()
+    queryset = models.Team.objects.all()
     serializer_class = None
     
     
 class EmployeeViewSet(viewsets.ModelViewSet):
-    queryset = Employee.objects.all()
+    queryset = models.Employee.objects.all()
     serializer_class = None
