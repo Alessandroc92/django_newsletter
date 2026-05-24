@@ -73,3 +73,18 @@ def create_templates_to_send(**kwargs):
         for employee in non_bday_employees
         ]
     return [*bday_templates,*non_bday_templates]
+
+
+def create_emails_from_templates(**kwargs):
+    template_objects = create_templates_to_send(**kwargs)
+    templates = Template.objects.bulk_create(template_objects)
+    notification_run = NotificationRun.objects.create(
+        n_recipient=len(templates),
+        notification_date=datetime.datetime.now().date()
+        )
+    email_logs = [
+        EmailLog(template=template, notification_run_id=notification_run.notification_run_id)
+        for template in templates
+        ]
+    EmailLog.objects.bulk_create(email_logs)
+    return tuple((email.subject, email.body, None,[email.recipient]) for email in templates)
