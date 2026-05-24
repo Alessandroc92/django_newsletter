@@ -1,12 +1,20 @@
 from django.db import models
 import datetime
 
-# Create your models here.
+
 class Branch(models.Model):
     """A model class representing branches of the multinational company."""
     branch_id = models.AutoField(primary_key=True)
     country = models.CharField(max_length=255, null=False)
     city = models.CharField(max_length=255, null=False)
+    
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["country", "city"],
+                name="unique_branch",
+            )
+        ]
     
 
 class Team(models.Model):
@@ -29,6 +37,14 @@ class Team(models.Model):
         choices=TeamType.choices,
         default=TeamType.SOFTWARE_DEVELOPMENT
         )
+    
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["branch", "team_type"],
+                name="unique_team",
+            )
+        ]
     
     
 class Employee(models.Model):
