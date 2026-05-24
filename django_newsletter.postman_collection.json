@@ -262,7 +262,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{   \n    \"custom_subject_no_bday\": \"No celebrations today :(\",\n    \"custom_body_no_bday\": \"There is no one celebrating their birthday today\",\n}",
+          "raw": "{   \n    \"custom_subject_no_bday\": \"No celebrations today :(\",\n    \"custom_body_no_bday\": \"There is no one celebrating their birthday today\"\n}",
           "options": {
             "raw": {
               "language": "json"
