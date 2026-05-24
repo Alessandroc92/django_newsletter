@@ -80,8 +80,7 @@ def create_emails_from_templates(**kwargs):
     template_objects = create_templates_to_send(**kwargs)
     templates = models.Template.objects.bulk_create(template_objects)
     notification_run = models.NotificationRun.objects.create(
-        n_recipient=len(templates),
-        notification_date=datetime.datetime.now().date()
+        n_recipients=len(templates),
         )
     email_logs = [
         models.EmailLog(template=template, notification_run_id=notification_run.notification_run_id)
