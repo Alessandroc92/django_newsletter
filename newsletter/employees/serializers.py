@@ -34,6 +34,8 @@ class EmployeeSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'birthdate',
+            'email_address',
+            'active',
             'age',
             'is_birthday',
             'branch',
