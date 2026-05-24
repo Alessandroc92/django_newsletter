@@ -1,6 +1,13 @@
 from rest_framework import viewsets
+from rest_framework.pagination import PageNumberPagination
 from . import models
 from . import serializers
+
+
+class ResultPagination(PageNumberPagination):
+    page_size = 25
+    page_size_query_param = 'page_size'
+    max_page_size = 100
 
 
 class BranchViewSet(viewsets.ReadOnlyModelViewSet):
@@ -16,3 +23,4 @@ class TeamViewSet(viewsets.ReadOnlyModelViewSet):
 class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = models.Employee.objects.all()
     serializer_class = serializers.EmployeeSerializer
+    pagination_class = ResultPagination
