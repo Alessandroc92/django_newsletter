@@ -27,7 +27,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
     branch = BranchSerializer(read_only=True)
     
     class Meta:
-        model = Employee
+        model = models.Employee
         fields = (
             'employee_id',
             'first_name',
