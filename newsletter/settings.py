@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_tasks',
     'rest_framework',
+    'newsletter.employees'
 ]
 
 MIDDLEWARE = [
