@@ -3,6 +3,7 @@ from django.core.management.base import BaseCommand
 import random
 import datetime
 
+
 class Command(BaseCommand):
     
     def handle(self, *args, **kwargs):
@@ -22,3 +23,17 @@ class Command(BaseCommand):
         Branch.objects.bulk_create(branches)
         branches_objects = Branch.objects.all()
         
+        teams = [
+            Team(team_type=team_name,branch=branch) 
+            for team_name in [
+                'Administrative',
+                'UX/UI Design',
+                'Software Development',
+                'HR'
+                ]
+            for branch in branches
+        ]
+        
+        Team.objects.bulk_create(teams)
+        team_objects = Team.objects.all()
+    
