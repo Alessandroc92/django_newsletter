@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 # Create your models here.
 class Branch(models.Model):
@@ -45,3 +46,15 @@ class Employee(models.Model):
     birthdate = models.DateField(null=False)
     active = models.BooleanField(default=True)
     created_at = models.DateField(auto_now=True)
+    
+    @property
+    def is_birthday(self) -> True:
+        now = datetime.datetime.now()
+        return (now.day, now.month) == (self.birthdate.day, self.birthdate.month)
+        
+    @property
+    def age(self) -> int:
+        return datetime.datetime.now().date().year - self.birthdate.year
+    
+    def __str__(self) -> str:
+        return f'{self.first_name} {self.last_name}'
