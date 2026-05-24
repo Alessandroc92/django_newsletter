@@ -10,7 +10,7 @@ class BranchViewSet(viewsets.ReadOnlyModelViewSet):
 
 class TeamViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Team.objects.all()
-    serializer_class = None
+    serializer_class = serializers.TeamSerializer
     
     
 class EmployeeViewSet(viewsets.ModelViewSet):

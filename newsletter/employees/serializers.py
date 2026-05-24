@@ -10,3 +10,14 @@ class BranchSerializer(serializers.ModelSerializer):
             'country',
             'city',
         )
+
+
+class TeamSerializer(serializers.ModelSerializer):
+    branch = BranchSerializer(read_only=True)
+    class Meta:
+        model = models.Team
+        fields = (
+            'team_id',
+            'team_type',
+            'branch'
+        )
