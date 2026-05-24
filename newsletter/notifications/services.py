@@ -28,8 +28,8 @@ def template_bday(employee: employees.models.Employee, **kwargs) -> models.Templ
     '''
     return models.Template(
         recipient=employee.email_address,
-        subject=kwargs.get('custom_subject') or subject,
-        body=kwargs.get('custom_body') or body,
+        subject=kwargs.get('custom_subject_bday') or subject,
+        body=kwargs.get('custom_body_bday') or body,
         )
     
 
@@ -58,8 +58,8 @@ def template_bday_info(
     '''
     return models.Template(
         recipient=employee.email_address,
-        subject=kwargs.get('custom_subject') or subject,
-        body=kwargs.get('custom_body') or body,
+        subject=kwargs.get('custom_subject_no_bday') or subject,
+        body=kwargs.get('custom_body_no_bday') or body,
         )
     
 
@@ -87,5 +87,5 @@ def create_emails_from_templates(**kwargs):
         models.EmailLog(template=template, notification_run_id=notification_run.notification_run_id)
         for template in templates
         ]
-    EmailLog.objects.bulk_create(email_logs)
+    models.EmailLog.objects.bulk_create(email_logs)
     return tuple((email.subject, email.body, None,[email.recipient]) for email in templates)

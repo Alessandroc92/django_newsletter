@@ -4,7 +4,8 @@ import datetime
 
 def employees_celebrating_bday(
     status: bool=True,
-    avoid_team_type: str='Administrative',
+    avoid_team_type: str | None ='Administrative',
+    **kwargs
     ) -> models.Employee:
     """A function that returns a list of Employee objects whose birthday is today.
 
@@ -28,7 +29,9 @@ def employees_celebrating_bday(
 
 def employees_not_celebrating_bday(
     status: bool=True,
-    avoid_team_type: str = 'Administrative') -> models.Employee:
+    avoid_team_type: str | None = 'Administrative',
+    **kwargs
+    ) -> models.Employee:
     """A function that returns a list of Employee objects whose birthday IS NOT today.
 
     Args:
