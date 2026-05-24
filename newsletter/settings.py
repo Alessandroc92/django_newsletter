@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_tasks',
     'rest_framework',
-    'newsletter.employees'
+    'newsletter.employees',
+    'newsletter.notifications'
 ]
 
 MIDDLEWARE = [
@@ -118,3 +119,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+
+TASKS = {
+    "default": 
+        {
+            "BACKEND": "django.tasks.backends.immediate.ImmediateBackend"
+            }
+        }
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
