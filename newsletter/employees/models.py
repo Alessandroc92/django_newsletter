@@ -15,6 +15,7 @@ class Team(models.Model):
         DESIGN = 'UX/UI Design'
         SOFTWARE_DEVELOPMENT = 'Software Development'
         HR = 'HR'
+        
     branch = models.ForeignKey(
         Branch,
         on_delete=models.DO_NOTHING,
@@ -27,3 +28,20 @@ class Team(models.Model):
         choices=TeamType.choices,
         default=TeamType.SOFTWARE_DEVELOPMENT
         )
+    
+    
+class Employee(models.Model):
+    """A model class that represent an employee from a specific team."""
+    employee_id = models.AutoField(primary_key=True)
+    team = models.ForeignKey(
+        Team,
+        on_delete=models.DO_NOTHING,
+        null=True,
+        related_name="employees"
+    )
+    first_name = models.CharField(null=False, max_length=255)
+    last_name = models.CharField(null=False, max_length=255)
+    email_address = models.EmailField(null=False)
+    birthdate = models.DateField(null=False)
+    active = models.BooleanField(default=True)
+    crated_at = models.DateField(auto_now=True)
