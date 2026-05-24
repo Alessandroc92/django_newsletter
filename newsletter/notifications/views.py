@@ -15,7 +15,7 @@ class NotificationRunViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = serializers.NotificationRunSerializer
 
 
-class EmailViewSet(viewsets.ReadOnlyModelViewSet):
+class EmailLogViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.EmailLog.objects.all()
     serializer_class = serializers.EmailLogSerializer
     
