@@ -149,7 +149,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"first_name\": \"Linus\",\n    \"last_name\": \"Torvalds\",\n    \"birthdate\": \"1969-12-18\"\n}",
+          "raw": "{\n    \"first_name\": \"Linus\",\n    \"last_name\": \"Torvalds\",\n    \"birthdate\": \"1969-12-18\",\n    \"email_address\": \"Linus_Torvalds_0001@company.com\"\n}",
           "options": {
             "raw": {
               "language": "json"
