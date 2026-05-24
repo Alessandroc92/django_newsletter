@@ -27,8 +27,8 @@ def template_bday(employee: employees.models.Employee, **kwargs) -> models.Templ
     '''
     return models.Template(
         recipient=employee.email_address,
-        subject=kwargs.get('subject') or subject,
-        body=kwargs.get('body') or body,
+        subject=kwargs.get('custom_subject') or subject,
+        body=kwargs.get('custom_body') or body,
         )
     
 
@@ -57,8 +57,8 @@ def template_bday_info(
     '''
     return models.Template(
         recipient=employee.email_address,
-        subject=kwargs.get('subject') or subject,
-        body=kwargs.get('body') or body,
+        subject=kwargs.get('custom_subject') or subject,
+        body=kwargs.get('custom_body') or body,
         )
     
 
