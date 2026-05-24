@@ -3,7 +3,7 @@ from . import models
 from newsletter import employees
 
 
-def template_bday(employee: employees.models.Employee) -> models.Template:
+def template_bday(employee: employees.models.Employee, **kwargs) -> models.Template:
     """A function that creates a Template model starting from Employee data.
 
     Args:
@@ -27,14 +27,15 @@ def template_bday(employee: employees.models.Employee) -> models.Template:
     '''
     return models.Template(
         recipient=employee.email_address,
-        subject=subject,
-        body=body,
+        subject=kwargs.get('subject') or subject,
+        body=kwargs.get('body') or body,
         )
     
 
 def template_bday_info(
     employee: employees.models.Employee,
     bday_employees: list[employees.models.Employee],
+    **kwargs
     ) -> models.Template:
 
     bday_employees_data = '\n'.join(
@@ -56,6 +57,19 @@ def template_bday_info(
     '''
     return models.Template(
         recipient=employee.email_address,
-        subject=subject,
-        body=body,
+        subject=kwargs.get('subject') or subject,
+        body=kwargs.get('body') or body,
         )
+    
+
+def create_templates_to_send(**kwargs):
+    bday_employees = managers.employees_celebrating_bday(**kwargs)
+    bday_templates = [
+        template_bday(employee=employee, **kwargs) for employee in bday_employees
+        ]
+    non_bday_employees = managers.employees_not_celebrating_bday(**kwargs)
+    non_bday_templates = [
+        template_bday_info(employee=employee, bday_employees=bday_employees, **kwargs) 
+        for employee in non_bday_employees
+        ]
+    return [*bday_templates,*non_bday_templates]
