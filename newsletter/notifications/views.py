@@ -26,8 +26,10 @@ class NotificationRunViewSet(viewsets.ReadOnlyModelViewSet):
 class EmailLogViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.EmailLog.objects.all()
     serializer_class = serializers.EmailLogSerializer
+    pagination_class = ResultPagination
     
 
 class TemplateViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Template.objects.all()
     serializer_class = serializers.TemplateSerializer
+    
