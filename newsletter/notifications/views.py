@@ -13,6 +13,11 @@ class ResultPagination(PageNumberPagination):
 class NotificationRunViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.NotificationRun.objects.all()
     serializer_class = serializers.NotificationRunSerializer
+    
+    @action(detail=False, url_path='send_bday_emails', methods=['post'])
+    def activate_email_task(self, request: HttpRequest):
+        send_happy_bday_emails.enqueue(**request.data)
+        return Response(data='The send bday email task has been executed as requested.')
 
 
 class EmailLogViewSet(viewsets.ReadOnlyModelViewSet):
