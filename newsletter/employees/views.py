@@ -15,4 +15,4 @@ class TeamViewSet(viewsets.ReadOnlyModelViewSet):
     
 class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = models.Employee.objects.all()
-    serializer_class = None
+    serializer_class = serializers.EmployeeSerializer
