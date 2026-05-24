@@ -5,7 +5,7 @@ from . import models
         
 class NotificationRunSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Template
+        model = models.NotificationRun
         fields = (
             'notification_run_id',
             'n_recipients',
@@ -18,9 +18,9 @@ class TemplateSerializer(serializers.ModelSerializer):
         model = models.Template
         fields = (
             'template_id',
-            'template_recipient'
-            'template_subject',
-            'template_body',
+            'recipient',
+            'subject',
+            'body',
         )
 
 
