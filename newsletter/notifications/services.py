@@ -41,23 +41,28 @@ def template_bday_info(
     **kwargs,
 ) -> models.Template:
 
-    bday_employees_data = "\n".join(
+
+    subject = f"There are some colleagues celebrating their birthday today!!!"
+
+    bday_employees_lines = [
         f"Name: {bde.first_name} {bde.last_name} - E-mail Address: {bde.email_address}"
         for bde in bday_employees
-    )
-    subject = f"There are some colleagues celebrating their birthday today!!!"
-    body = f"""
-        Hey {employee.first_name}!
-        
-        Today there are {len(bday_employees)} colleagues celebrating their birthday!
-        Don't forget to contact them all! Here's a handy list for you:
-        
-        {bday_employees_data}
-        
-        Thanks,
-        
-        Global HR
-    """
+    ]
+
+    body_lines = [
+        f"Hey {employee.first_name}!",
+        "",
+        f"Today there are {len(bday_employees)} colleagues celebrating their birthday!",
+        "Don't forget to contact them all! Here's a handy list for you:",
+        "",
+        *bday_employees_lines,
+        "",
+        "Thanks,",
+        "",
+        "Global HR",
+    ]
+
+    body = "\n".join(body_lines)
     return models.Template(
         recipient=employee.email_address,
         subject=kwargs.get("custom_subject_no_bday") or subject,
