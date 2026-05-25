@@ -1,7 +1,9 @@
 import datetime
-from . import models
-from newsletter.employees import services
+
 from newsletter import employees
+from newsletter.employees import services
+
+from . import models
 
 
 def template_bday(employee: employees.models.Employee, **kwargs) -> models.Template:
@@ -13,8 +15,8 @@ def template_bday(employee: employees.models.Employee, **kwargs) -> models.Templ
     Returns:
         models.Template: A Template model object
     """
-    subject = f'Happy Birthday, Dear {employee.first_name}!!!'
-    body = f'''
+    subject = f"Happy Birthday, Dear {employee.first_name}!!!"
+    body = f"""
         Hey {employee.first_name}!
         
         A little bird told us that today you're turning {employee.age}!
@@ -25,26 +27,26 @@ def template_bday(employee: employees.models.Employee, **kwargs) -> models.Templ
         All the best from your favorite Company,
         
         Global HR
-    '''
+    """
     return models.Template(
         recipient=employee.email_address,
-        subject=kwargs.get('custom_subject_bday') or subject,
-        body=kwargs.get('custom_body_bday') or body,
-        )
-    
+        subject=kwargs.get("custom_subject_bday") or subject,
+        body=kwargs.get("custom_body_bday") or body,
+    )
+
 
 def template_bday_info(
     employee: employees.models.Employee,
     bday_employees: list[employees.models.Employee],
-    **kwargs
-    ) -> models.Template:
+    **kwargs,
+) -> models.Template:
 
-    bday_employees_data = '\n'.join(
-        f'Name: {bde.first_name} {bde.last_name} - E-mail Address: {bde.email_address}' 
+    bday_employees_data = "\n".join(
+        f"Name: {bde.first_name} {bde.last_name} - E-mail Address: {bde.email_address}"
         for bde in bday_employees
-        )
-    subject = f'There are some colleagues celebrating their birthday today!!!'
-    body = f'''
+    )
+    subject = f"There are some colleagues celebrating their birthday today!!!"
+    body = f"""
         Hey {employee.first_name}!
         
         Today there are {len(bday_employees)} colleagues celebrating their birthday!
@@ -55,25 +57,25 @@ def template_bday_info(
         Thanks,
         
         Global HR
-    '''
+    """
     return models.Template(
         recipient=employee.email_address,
-        subject=kwargs.get('custom_subject_no_bday') or subject,
-        body=kwargs.get('custom_body_no_bday') or body,
-        )
-    
+        subject=kwargs.get("custom_subject_no_bday") or subject,
+        body=kwargs.get("custom_body_no_bday") or body,
+    )
+
 
 def create_templates_to_send(**kwargs):
     bday_employees = services.employees_celebrating_bday(**kwargs)
     bday_templates = [
         template_bday(employee=employee, **kwargs) for employee in bday_employees
-        ]
+    ]
     non_bday_employees = services.employees_not_celebrating_bday(**kwargs)
     non_bday_templates = [
-        template_bday_info(employee=employee, bday_employees=bday_employees, **kwargs) 
+        template_bday_info(employee=employee, bday_employees=bday_employees, **kwargs)
         for employee in non_bday_employees
-        ]
-    return [*bday_templates,*non_bday_templates]
+    ]
+    return [*bday_templates, *non_bday_templates]
 
 
 def create_emails_from_templates(**kwargs):
@@ -81,10 +83,14 @@ def create_emails_from_templates(**kwargs):
     templates = models.Template.objects.bulk_create(template_objects)
     notification_run = models.NotificationRun.objects.create(
         n_recipients=len(templates),
-        )
+    )
     email_logs = [
-        models.EmailLog(template=template, notification_run_id=notification_run.notification_run_id)
+        models.EmailLog(
+            template=template, notification_run_id=notification_run.notification_run_id
+        )
         for template in templates
-        ]
+    ]
     models.EmailLog.objects.bulk_create(email_logs)
-    return tuple((email.subject, email.body, None,[email.recipient]) for email in templates)
+    return tuple(
+        (email.subject, email.body, None, [email.recipient]) for email in templates
+    )

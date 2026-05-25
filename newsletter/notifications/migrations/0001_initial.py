@@ -5,37 +5,57 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='NotificationRun',
+            name="NotificationRun",
             fields=[
-                ('notification_run_id', models.AutoField(primary_key=True, serialize=False)),
-                ('n_recipient', models.PositiveIntegerField()),
-                ('notification_date', models.DateTimeField(auto_now=True)),
+                (
+                    "notification_run_id",
+                    models.AutoField(primary_key=True, serialize=False),
+                ),
+                ("n_recipient", models.PositiveIntegerField()),
+                ("notification_date", models.DateTimeField(auto_now=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Template',
+            name="Template",
             fields=[
-                ('template_id', models.AutoField(primary_key=True, serialize=False)),
-                ('recipient', models.EmailField(max_length=254)),
-                ('subject', models.TextField()),
-                ('body', models.TextField()),
+                ("template_id", models.AutoField(primary_key=True, serialize=False)),
+                ("recipient", models.EmailField(max_length=254)),
+                ("subject", models.TextField()),
+                ("body", models.TextField()),
             ],
         ),
         migrations.CreateModel(
-            name='EmailLog',
+            name="EmailLog",
             fields=[
-                ('notification_id', models.AutoField(primary_key=True, serialize=False)),
-                ('sent_at', models.DateTimeField(auto_now=True)),
-                ('notification_run', models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='notification_runs', to='notifications.notificationrun')),
-                ('template', models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='templates', to='notifications.template')),
+                (
+                    "notification_id",
+                    models.AutoField(primary_key=True, serialize=False),
+                ),
+                ("sent_at", models.DateTimeField(auto_now=True)),
+                (
+                    "notification_run",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.DO_NOTHING,
+                        related_name="notification_runs",
+                        to="notifications.notificationrun",
+                    ),
+                ),
+                (
+                    "template",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.DO_NOTHING,
+                        related_name="templates",
+                        to="notifications.template",
+                    ),
+                ),
             ],
         ),
     ]

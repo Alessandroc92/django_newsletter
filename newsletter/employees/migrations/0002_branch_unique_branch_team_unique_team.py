@@ -4,18 +4,21 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('employees', '0001_initial'),
+        ("employees", "0001_initial"),
     ]
 
     operations = [
         migrations.AddConstraint(
-            model_name='branch',
-            constraint=models.UniqueConstraint(fields=('country', 'city'), name='unique_branch'),
+            model_name="branch",
+            constraint=models.UniqueConstraint(
+                fields=("country", "city"), name="unique_branch"
+            ),
         ),
         migrations.AddConstraint(
-            model_name='team',
-            constraint=models.UniqueConstraint(fields=('branch', 'team_type'), name='unique_team'),
+            model_name="team",
+            constraint=models.UniqueConstraint(
+                fields=("branch", "team_type"), name="unique_team"
+            ),
         ),
     ]

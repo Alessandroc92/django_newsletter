@@ -4,19 +4,18 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('notifications', '0001_initial'),
+        ("notifications", "0001_initial"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='notificationrun',
-            old_name='n_recipient',
-            new_name='n_recipients',
+            model_name="notificationrun",
+            old_name="n_recipient",
+            new_name="n_recipients",
         ),
         migrations.RemoveField(
-            model_name='notificationrun',
-            name='notification_date',
+            model_name="notificationrun",
+            name="notification_date",
         ),
     ]

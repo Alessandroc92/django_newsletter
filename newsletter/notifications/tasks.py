@@ -1,5 +1,6 @@
 from django.core.mail import send_mass_mail
 from django.tasks import task
+
 from . import services
 
 
