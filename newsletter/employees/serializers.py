@@ -24,8 +24,12 @@ class TeamSerializer(serializers.ModelSerializer):
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
-    team = TeamSerializer(read_only=True)
-    branch = BranchSerializer(read_only=True)
+    team = serializers.PrimaryKeyRelatedField(
+        queryset=models.Team.objects.all(),
+        required=True,
+        allow_null=False,
+    )
+    team_detail = TeamSerializer(source="team", read_only=True)
 
     class Meta:
         model = models.Employee
@@ -38,9 +42,10 @@ class EmployeeSerializer(serializers.ModelSerializer):
             "active",
             "age",
             "is_birthday",
-            "branch",
             "team",
+            "team_detail",
         )
+        read_only_fields = ("employee_id", "age", "is_birthday")
 
     def validate_birthdate(self, value) -> int:
         more_than_70 = datetime.datetime.now().date().year - value.year >= 70
