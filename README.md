@@ -9,10 +9,10 @@ Funzionalità incluse:
 - Gestione anagrafica dipendenti tramite API REST con full CRUD;
 - Consultazione sedi e team in modalità solo lettura;
 - Invio manuale della newsletter compleanni ai festeggiati e ai colleghi;
-- Generazione dei template email in modalità custom, con override;
+- Generazione dei template email in modalità custom, con override del template standard;
 - Tracciamento degli invii effettuati;
 - Backend email mock su console;
-- Dati di esempio creati tramite management command (`populate_database.py`);
+- Dati di esempio creati tramite management command (`populate_database`);
 - Collection Postman inclusa nel repository;
 - Docker Compose file per testare le API via Docker.
 
@@ -54,6 +54,18 @@ python manage.py runserver
 
 Se il database è già popolato, il comando `populate_database` evita di duplicare sedi e team già presenti.
 
+
+## Descrizione modello dati scelto
+
+Il modello dati è stato organizzato separando l’anagrafica aziendale dalla parte relativa all’invio e al tracciamento delle notifiche. Si è fatto ricorso a Model che si appoggiano a ModelViewSet per gestire CRUD.
+
+- `Branch`: Rappresenta una sede aziendale, identificata da nazione e città;
+- `Team`: rappresenta un team aziendale collegato a una specifica sede;
+- `Employee`: rappresenta il dipendente, con dati anagrafici, email, data di nascita, stato attivo/non attivo e team di appartenenza;
+- `NotificationRun`: rappresenta una singola esecuzione del processo di invio newsletter;
+- `Template`: contiene oggetto e corpo dell’email generata per uno specifico destinatario;
+- `EmailLog`: conserva lo storico delle email inviate, collegando template e run di invio.
+
 ## Utilizzo
 
 Dopo l'avvio, le API sono disponibili su:
@@ -67,18 +79,6 @@ Nel repository è presente anche la collection Postman:
 ```bash
 django_newsletter.postman_collection.json
 ```
-
-## Descrizione modello dati scelto
-
-Il modello dati è stato organizzato separando l’anagrafica aziendale dalla parte relativa all’invio e al tracciamento delle notifiche. Si è fatto ricorso a Model che si appoggiano a ModelViewSet per gestire CRUD.
-
-- `Branch`: Rappresenta una sede aziendale, identificata da nazione e città;
-- `Team`: rappresenta un team aziendale collegato a una specifica sede;
-- `Employee`: rappresenta il dipendente, con dati anagrafici, email, data di nascita, stato attivo/non attivo e team di appartenenza;
-- `NotificationRun`: rappresenta una singola esecuzione del processo di invio newsletter;
-- `Template`: contiene oggetto e corpo dell’email generata per uno specifico destinatario;
-- `EmailLog`: conserva lo storico delle email inviate, collegando template e run di invio.
-
 
 ## Esempi di chiamate API (curl)
 
@@ -136,13 +136,15 @@ Non servono credenziali SMTP reali. Quando viene chiamato il trigger manuale, le
 - Gli altri dipendenti ricevono un'email informativa con l'elenco dei festeggiati e un invito a contattarli;
 - Il template utilizza i dati dei dipendenti di default;
 - È possibile modificare il messaggio inviato tramite parametri custom nella chiamata di invio.
+    Infatti, si può fare l'override del messaggio ricevuto da tutti esempi (es: 'custom_subject_no_bday' per diverso oggetto).
+    Si rimanda all'esempio presente nella collection Postman.
 
 ## Limiti e sviluppi futuri
 
 Possibili miglioramenti:
 
 - Introdurre un vero scheduler giornaliero per l'invio automatico delle e-mail;
-- Rendere configurabile da API la gestione dei template email;
+- Creare un sistema di gestione e-mail completo, con utenti che possono mandare certi tipi di e-mail se autorizzati;
 - Aggiungere filtri per sede, team e stato del dipendente;
 - Distinguere oltre che tra stato "attivo" e "non attivo" tra ferie, maternità, licenziamento, dimissioni, ecc.;
 - Aggiungere autenticazione e autorizzazioni;
