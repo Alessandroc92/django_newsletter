@@ -72,7 +72,7 @@ class Command(BaseCommand):
                     active=random.randint(0, 1),
                     team=random.choice(team_objects),
                 )
-                for _ in range(10000)
+                for _ in range(2517)
             ]
             for employee in employees:
                 employee.team = random.choice(team_objects)
