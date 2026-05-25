@@ -70,7 +70,9 @@ class Employee(models.Model):
         
     @property
     def age(self) -> int:
-        return datetime.datetime.now().date().year - self.birthdate.year
+        today = datetime.datetime.now().date()
+        has_had_birthday = (today.month, today.day) >= (self.birthdate.month, self.birthdate.day)
+        return today.year - self.birthdate.year - (0 if has_had_birthday else 1)
     
     def __str__(self) -> str:
         return f'{self.first_name} {self.last_name}'

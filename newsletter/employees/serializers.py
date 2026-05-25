@@ -45,5 +45,5 @@ class EmployeeSerializer(serializers.ModelSerializer):
     def validate_birthdate(self, value) -> int:
         more_than_70 = datetime.datetime.now().date().year - value.year >= 70 
         if more_than_70:
-            serializers.ValidationError('You should be retired by now!')
+            raise serializers.ValidationError('You should be retired by now!')
         return value
