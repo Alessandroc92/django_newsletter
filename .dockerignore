@@ -2,3 +2,14 @@
 db.sqlite3
 .python-version
 __pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+.env
+.venv/
+venv/
+db.sqlite3-journal
+.DS_Store
+.pytest_cache/
+.mypy_cache/
