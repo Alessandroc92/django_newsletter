@@ -50,9 +50,9 @@ class Employee(models.Model):
 
     employee_id = models.AutoField(primary_key=True)
     team = models.ForeignKey(
-        Team, 
+        Team,
         on_delete=models.DO_NOTHING,
-        null=False, 
+        null=False,
         blank=False,
         related_name="employees",
     )

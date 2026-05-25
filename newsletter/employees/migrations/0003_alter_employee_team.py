@@ -5,16 +5,20 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('employees', '0002_branch_unique_branch_team_unique_team'),
+        ("employees", "0002_branch_unique_branch_team_unique_team"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='employee',
-            name='team',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.DO_NOTHING, related_name='employees', to='employees.team'),
+            model_name="employee",
+            name="team",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                related_name="employees",
+                to="employees.team",
+            ),
             preserve_default=False,
         ),
     ]
