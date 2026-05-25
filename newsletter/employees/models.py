@@ -50,7 +50,11 @@ class Employee(models.Model):
 
     employee_id = models.AutoField(primary_key=True)
     team = models.ForeignKey(
-        Team, on_delete=models.DO_NOTHING, null=True, related_name="employees"
+        Team, 
+        on_delete=models.DO_NOTHING,
+        null=False, 
+        blank=False,
+        related_name="employees",
     )
     first_name = models.CharField(null=False, max_length=255)
     last_name = models.CharField(null=False, max_length=255)
