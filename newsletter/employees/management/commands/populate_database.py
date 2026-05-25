@@ -14,6 +14,17 @@ FIRST_NAMES = ("John", "Sarah", "Nassim", "Faroq", "Clara")
 LAST_NAMES = ("Smith", "Drinkwater", "Rogue", "Taleb", "Dent")
 
 
+def random_birthday(begin_year:int =1957, end_year: int=2008) -> datetime.date:
+    random_month = random.randint(1, 12)
+    random_day = random.randint(1,28) if random_month == 2\
+        else (random.randint(1,30) if random_month in (4,6,9,11) else random.randint(1,31))
+    return datetime.date(
+                        year=random.randint(begin_year, end_year),
+                        month=random_month,
+                        day=random_day,
+                    )
+
+
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         try:
@@ -50,15 +61,11 @@ class Command(BaseCommand):
                 Employee(
                     first_name=random.choice(FIRST_NAMES),
                     last_name=random.choice(LAST_NAMES),
-                    birthdate=datetime.date(
-                        year=random.randint(1965, 2005),
-                        month=random.randint(1, 12),
-                        day=random.randint(1, 28),
-                    ),
+                    birthdate=random_birthday(),
                     active=random.randint(0, 1),
                     team=random.choice(team_objects),
                 )
-                for _ in range(1000)
+                for _ in range(10000)
             ]
             for employee in employees:
                 employee.team = random.choice(team_objects)
